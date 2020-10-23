@@ -40,8 +40,8 @@
 
     async function fakeAuthenticate(email, password) {
        
-        let response = await fetch('https://www.mocky.io/v2/5dba690e3000008c00028eb6');
-        let data = await response.json();
+        let data = fetch('https://www.mocky.io/v2/5dba690e3000008c00028eb6')
+        .then( data =>data.json());
 
         const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;   
         localStorage.setItem('token', fakeJwtToken);          
