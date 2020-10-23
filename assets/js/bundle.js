@@ -67,7 +67,7 @@
         users.map(i=>{
             let li = create('li')
             li.classList.add('lista-usuarios')
-            li.innerHTML = ` <img src="${i.avatar_url}"/> <span>  ${i.login}</span> `;
+            li.innerHTML = ` <a href="${i.url}" ><img src="${i.avatar_url}"/> <span>  ${i.login}</span></a> `;
             Ul.appendChild(li)
         })
         app.appendChild(Ul)
