@@ -28,8 +28,124 @@ body {
     -webkit-font-smoothing: antialiased;
     background: linear-gradient(-45deg, #aaa 25%, #eee 100%);
     background-attachment: fixed;
+    
 }
 
 /**
 * YOUR CODE HERE
 */
+
+#app.logged .logo {
+    margin-top: 10%;  
+} 
+
+.logo {
+    max-height: 40px; 
+    margin-top: 20%; 
+}
+
+.login {
+    width: 100%;
+    max-width: 350px;  
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #ddd;   
+    border-radius: 15px 0px 15px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.login input, .login button {
+    background-color: #ccc;
+    color: #888;
+    border: none; 
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.login button {
+    color: #fff;
+    background-color: #22863a;;   
+}
+.login button:hover {
+    background-color: #28a745;
+}
+
+.login button:disabled {
+    background-color: #ccc;
+}
+
+.container {
+    display: flex;
+    max-width: 700px;
+    margin: 20px auto;
+    align-content: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.lista-usuarios  {
+    display: flex; 
+    position: relative;
+    align-items: flex-start;
+    vertical-align: middle; 
+    padding:5px;
+    margin: 5px; 
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    flex: auto;
+}
+
+.lista-usuarios img {
+    border-radius: 50%;    
+    float: left;
+    left: 10px;
+    max-width: 65px;    
+    position: absolute;
+    top: 5px;    
+}
+
+.lista-usuarios:hover img{
+    /* transition: width 500s, top 300ms, left 300ms;
+    transition-timing-function: ease-out; */
+    width: 65px;
+    top: -10px;
+    left: -10px; 
+    z-index: 10;
+}
+
+.lista-usuarios:not(:hover) img {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    max-width: 35px;
+}
+
+.lista-usuarios span {
+    color: #888;
+    flex: 1;
+    font-weight: bold;
+    margin: 10px 10px 10px 50px;
+    vertical-align: middle;
+}
+
+footer {
+    background-color: #f5f5f5;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;    
+    color: palevioletred;
+}
+
+footer span {
+    
+    font-weight: 600;
+}

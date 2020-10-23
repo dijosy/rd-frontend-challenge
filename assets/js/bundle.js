@@ -1,6 +1,6 @@
 (() => {
-    const selector = selector => /* trecho omitido */
-    const create = element => /* trecho omitido */
+    const selector = selector => document.querySelector(selector);/* trecho omitido */
+    const create = element => document.createElement(element) /* trecho omitido */
 
     const app = selector('#app');
 
@@ -15,12 +15,11 @@
 
     Form.onsubmit = async e => {
         e.preventDefault();
-        const [email, password] = /* trecho omitido */
-
+       
+        const [email, password] = e.target;
         const {url} = await fakeAuthenticate(email.value, password.value);
 
-        location.href='#users';
-        
+        location.href='#users';        
         const users = await getDevelopersList(url);
         renderPageUsers(users);
     };
@@ -32,53 +31,55 @@
             : button.removeAttribute('disabled');
     };
 
-    Form.innerHTML = /**
-    * bloco de código omitido
-    * monte o seu formulário
-    */
-
+    Form.innerHTML =`<input type="email" name="email" placeholder="Entre com seu e-mail" required />
+                    <input type="password" name="password" placeholder="Digite sua senha supersecreta" required />
+                    <button name="button" type="submit" disabled="disabled"> Entrar </button>`;           
+    
     app.appendChild(Logo);
     Login.appendChild(Form);
 
     async function fakeAuthenticate(email, password) {
+       
+        let response = await fetch('http://www.mocky.io/v2/5dba690e3000008c00028eb6');
+        let data = await response.json();
 
-        /**
-         * bloco de código omitido
-         * aqui esperamos que você faça a requisição ao URL informado
-         */
-
-        const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;
-        /* trecho omitido */
+        const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;   
+        localStorage.setItem('token', fakeJwtToken);          
 
         return data;
     }
 
     async function getDevelopersList(url) {
-        /**
-         * bloco de código omitido
-         * aqui esperamos que você faça a segunda requisição 
-         * para carregar a lista de desenvolvedores
-         */
+
+        let response = fetch(url)
+        .then(data=>data.json())
+       
+        return response; 
     }
 
     function renderPageUsers(users) {
         app.classList.add('logged');
-        Login.style.display = /* trecho omitido */
+        Login.style.display = 'none';
 
         const Ul = create('ul');
         Ul.classList.add('container')
 
-        /**
-         * bloco de código omitido
-         * exiba a lista de desenvolvedores
-         */
-
+        users.map(i=>{
+            let li = create('li')
+            li.classList.add('lista-usuarios')
+            li.innerHTML = ` <img src="${i.avatar_url}"/> <span>  ${i.login}</span> `;
+            Ul.appendChild(li)
+        })
         app.appendChild(Ul)
+
+        const footer = create('footer')
+        footer.innerHTML = `by&nbsp;<span>DiJosy &#128150;</span>`;
+        app.appendChild(footer)
     }
 
     // init
     (async function(){
-        const rawToken = /* trecho omitido */
+        const rawToken =  localStorage.getItem('token');
         const token = rawToken ? rawToken.split('.') : null
         if (!token || token[2] < (new Date()).getTime()) {
             localStorage.removeItem('token');
