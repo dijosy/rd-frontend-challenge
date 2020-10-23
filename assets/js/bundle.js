@@ -40,17 +40,17 @@
 
     async function fakeAuthenticate(email, password) {
        
-        let data = fetch('https://www.mocky.io/v2/5dba690e3000008c00028eb6')
-        .then( data =>data.json());
+        let response = await fetch('https://www.mocky.io/v2/5dba690e3000008c00028eb6')
+        .then(data => data.json());
 
-        const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;   
+        const fakeJwtToken = `${btoa(email+password)}.${btoa(response.url)}.${(new Date()).getTime()+300000}`;   
         localStorage.setItem('token', fakeJwtToken);          
 
-        return data;
+        return response;
     }
 
     async function getDevelopersList(url) {
-
+        url = url.replace("http", "https");       
         let response = fetch(url)
         .then(data=>data.json())
        
